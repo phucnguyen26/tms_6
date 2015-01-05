@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150102061359) do
+ActiveRecord::Schema.define(version: 20150106040154) do
 
   create_table "course_subjects", force: true do |t|
     t.integer  "course_id"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150102061359) do
     t.boolean  "is_suppervisor"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remember_digest"
   end
 
 end
