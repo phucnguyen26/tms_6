@@ -1,0 +1,15 @@
+<% provide(:title, 'Start Course') %>
+<h1>Start Course <%= @enrollment.course_id%></h1>
+<div class="row">
+  <%= form_for ([:suppervisor,@enrollment]) do |f| %>
+  <%= render "shared/error_enrollment" %>
+  <div class="form-group">
+    <%= f.label :course_id, "Course" %>
+    <%= f.select :course_id, Course.all.map { |course| [course.name, course.id] },
+        { prompt: "Select Course" } %>
+    <%= f.label :user_id, "Trainee" %><br>
+    <%= check_box_tag "enrollment[user_id][]", user.id %><%= user.name %>
+  </div>
+  <%= f.submit "Start", class: "btn btn-dx btn-primary" %>
+  <% end %>
+</div>

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root "static_pages#home"
-  get 'home'     => 'static_pages#home'
   get 'login'    => 'sessions#new'
   post 'login'   => 'sessions#create'
   delete'logout' => 'sessions#destroy'
@@ -8,6 +6,7 @@ Rails.application.routes.draw do
   namespace :suppervisor do
     resources "users"
     resources "courses"
+    resources "enrollments", only: [:new, :create, :show, :destroy]
   end
   root 'static_pages#home'
   get 'static_pages/home'

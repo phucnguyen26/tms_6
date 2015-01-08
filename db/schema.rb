@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106040154) do
+ActiveRecord::Schema.define(version: 20150112034200) do
 
   create_table "course_subjects", force: true do |t|
     t.integer  "course_id"
@@ -30,6 +30,27 @@ ActiveRecord::Schema.define(version: 20150106040154) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "enroll_trainees", force: true do |t|
+    t.integer  "enroll_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "enroll_trainees", ["enroll_id"], name: "index_enroll_trainees_on_enroll_id", using: :btree
+  add_index "enroll_trainees", ["user_id"], name: "index_enroll_trainees_on_user_id", using: :btree
+
+  create_table "enrollments", force: true do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.boolean  "status_course"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "enrollments", ["course_id"], name: "index_enrollments_on_course_id", using: :btree
+  add_index "enrollments", ["user_id"], name: "index_enrollments_on_user_id", using: :btree
 
   create_table "enrolls", force: true do |t|
     t.integer  "trainee_id"

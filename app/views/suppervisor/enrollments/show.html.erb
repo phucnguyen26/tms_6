@@ -1,0 +1,30 @@
+<h1>Enroll <%= @enrollment.id %></h1>
+<div class="row">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Enrollment</th>
+        <th>Course</th>
+        <th>Status Course</th>
+        <th>Members of Course</th>
+        <th>End Course</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @enrollment.id%></td>
+        <td><%= @enrollment.course_id%></td>
+        <td><%= @enrollment.status_course %></td>
+        <td>
+          <% @users.each do |user|%>
+            <%= user.name %><br>
+          <%end%>
+        </td>
+        <td><%= link_to "End Course", suppervisor_enrollment_path(@enrollment),
+                data: { confirm: "Are you sure?", method: :delete },
+                class: "btn btn-large btn-primary" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

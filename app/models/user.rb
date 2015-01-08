@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  has_many :enrollments
+  has_many :courses, through: :enrollments
+  
+  has_many :course_subjects, dependent: :destroy
   attr_accessor :remember_token, :password_not_require
   before_save   :downcase_email
 
@@ -11,6 +15,9 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, allow_blank: true, 
   confirmation: true, unless: :password_not_require
   validates :password_confirmation, length: { minimum: 6 }
+
+  scope :trainees, -> { where is_suppervisor: false }
+  scope :suppervisors, -> { where is_suppervisor: true }
 
   def User.digest string
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
