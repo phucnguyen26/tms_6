@@ -6,4 +6,5 @@ class Course < ActiveRecord::Base
         allow_blank: true
   validates :instruction,  presence: true, uniqueness: true, length: { maximum: 500 }, 
         allow_blank: true
+  has_many :subjects
 end

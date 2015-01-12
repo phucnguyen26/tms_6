@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106040154) do
+ActiveRecord::Schema.define(version: 20150107015319) do
 
   create_table "course_subjects", force: true do |t|
     t.integer  "course_id"
@@ -72,15 +72,27 @@ ActiveRecord::Schema.define(version: 20150106040154) do
     t.datetime "updated_at"
   end
 
-  create_table "trainees", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+  create_table "user_lessons", force: true do |t|
     t.integer  "user_id"
+    t.integer  "lesson_id"
+    t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "trainees", ["user_id"], name: "index_trainees_on_user_id", using: :btree
+  add_index "user_lessons", ["lesson_id"], name: "index_user_lessons_on_lesson_id", using: :btree
+  add_index "user_lessons", ["user_id"], name: "index_user_lessons_on_user_id", using: :btree
+
+  create_table "user_subjects", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "subject_id"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_subjects", ["subject_id"], name: "index_user_subjects_on_subject_id", using: :btree
+  add_index "user_subjects", ["user_id"], name: "index_user_subjects_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

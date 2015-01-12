@@ -1,0 +1,34 @@
+<% provide :title, "Supervisor | Subjects" %>
+
+<h1 class="page-header">All Subjects</h1>
+
+<% if @subjects.any? %>
+  <%= will_paginate @subjects %>
+  <table class="table">
+    <thead>
+      <tr>
+      	<th>id</th>
+        <th>Name</th>
+        <th>Number of lessons</th>
+        <th>show</th>
+        <th>destroy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @subjects.each do |subject| %>
+        <tr>
+          <th><%= subject.id %></th>
+          <th><%= subject.name %></th>
+          <th><%= subject.lessons.count %></th>
+          <th><%= link_to "Show", suppervisor_subject_path(subject) %></th>
+          <th><%= link_to "Delete", suppervisor_subject_path(subject),
+          data: { confirm: "Are you sure?", method: :delete } %><th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info">There is no subject available right now!</div>
+<% end %>
+
+<%= link_to "New Subject", new_suppervisor_subject_path, class: "btn btn-primary" %>
