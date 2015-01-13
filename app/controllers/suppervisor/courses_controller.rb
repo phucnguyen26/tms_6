@@ -7,6 +7,7 @@ class Suppervisor::CoursesController < ApplicationController
 
   def create
     @course = Course.new course_params
+    @course.status_course = "0"
     if @course.save
       redirect_to [:suppervisor,@course]
       flash[:success] = "Create Course Successful"
@@ -31,7 +32,14 @@ class Suppervisor::CoursesController < ApplicationController
 
   def update
     @course = Course.new course_params
-    if @course.update_attributes course_params
+    status = params[:status]
+    if status
+      @course.status_course = status
+      @course.save
+      flash[:success] = "Course ended!"
+      redirect_to [:suppervisor, @course]
+
+    elsif @course.update_attributes course_params
       flash[:success] = "Course updated"
       redirect_to [:suppervisor, @course]
     else

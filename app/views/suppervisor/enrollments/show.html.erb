@@ -1,0 +1,15 @@
+<% provide(:title, 'Assign Trainees') %>
+<h1>Assign Trainees</h1>
+<div class="row">
+  <%= form_tag(:url => suppervisor_enrollments_path, :method => "PATCH") do %>
+  <%= hidden_field_tag "course_id", params[:course_id] %>
+  <%= render "shared/error_enrollment" %>
+    <div class="form-group">
+      <% @users.try(:each) do |user| %>
+        <br>
+        <%= check_box_tag "enrollment[user_id][]", user.id %><%= user.name %>
+      <% end %>
+    </div>
+    <%= submit_tag "Start", class: "btn btn-dx btn-primary" %>
+  <% end %>
+</div>

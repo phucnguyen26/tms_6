@@ -8,6 +8,10 @@
       <%= f.text_field :name, class: "form-control" %>
       <%= f.label :instruction %>
       <%= f.text_field :instruction, class: "form-control" %>
+      <div class="span6">
+        <%= f.label :subject %>
+        <%= f.collection_check_boxes :subject_ids, Subject.all, :id, :name %>
+      </div>
       <%= f.submit "Save Chance", class: "btn btn-primary" %>
     <% end %>
   </div>

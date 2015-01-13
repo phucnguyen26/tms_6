@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources "users"
     resources "courses"
     resources :subjects
+    resource "enrollments", only: [:show, :update]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

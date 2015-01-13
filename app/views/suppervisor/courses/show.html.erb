@@ -6,20 +6,37 @@
           <tr>
             <th>Name</th>
             <th>Intruction</th>
+            <th>Status Course</th>
             <th>Subjects of Course</th>
             <th>Members of Course</th>
+            <th>End Course</th>
+            <th>Assign Trainee</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><%= @course.name%> </td>
             <td><%= @course.instruction %></td>
+            <td><%= @course.status_course %></td>
             <td>
               <% @sujects.each do |suject|%>
                 <%= suject.name%><br>
               <%end%>
             </td>
-            <td>#</td>
+            <td>
+              <% @users.each do |user|%>
+                <%= user.name %><br>
+              <%end%>
+            </td>
+            <td>
+              <% if @course.status_course == true %>
+                <%= link_to "End Course", suppervisor_course_path(@course, status: 0), method: :patch, class: "btn btn-primary" %>
+              <% end %>
+           
+            </td>
+            <td>
+              <%= link_to "Assign trainee", suppervisor_enrollments_path(course_id: @course.id), class: "btn btn-primary" %>
+            </td>
           </tr>
         </tbody>
       </table>
